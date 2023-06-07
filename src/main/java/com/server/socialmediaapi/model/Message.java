@@ -18,15 +18,27 @@ public class Message {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    /**
+     * Отправитель
+     */
     @Column(name = "sender")
     private int sender;
 
+    /**
+     * Получатель
+     */
     @Column(name = "consumer")
     private int consumer;
 
+    /**
+     * Содержание сообщения
+     */
     @Column(name = "content")
     private String content;
 
+    /**
+     * Дата и время отправки сообщения
+     */
     @Column(name = "date_of_creation")
     private LocalDateTime dateOfCreation;
 }

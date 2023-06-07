@@ -16,9 +16,15 @@ public class Subscription {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    /**
+     * Подписчик
+     */
     @Column(name = "subscriber")
     private int subscriber;
 
+    /**
+     * Издатель
+     */
     @Column(name = "publisher")
     private int publisher;
 }
