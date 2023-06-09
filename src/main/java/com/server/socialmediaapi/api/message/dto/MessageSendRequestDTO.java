@@ -1,6 +1,6 @@
 package com.server.socialmediaapi.api.message.dto;
 
-import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.Size;
 import lombok.*;
 
@@ -10,13 +10,10 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 public class MessageSendRequestDTO {
-    @Pattern(regexp = "\\d+", message = "The id field has only a numeric value")
-    private Integer id;
-
-    @Pattern(regexp = "\\d+", message = "The sender field has only a numeric value")
+    @Min(value = 0, message = "sender id cannot be less than 0")
     private int sender;
 
-    @Pattern(regexp = "\\d+", message = "The consumer field has only a numeric value")
+    @Min(value = 0, message = "consumer id cannot be less than 0")
     private int consumer;
 
     @Size(max = 500, message = "The message field cannot have more than 500 characters")

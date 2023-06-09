@@ -1,7 +1,11 @@
 package com.server.socialmediaapi.services;
 
+import com.server.socialmediaapi.api.message.dto.MessageHistoryRequestDTO;
+import com.server.socialmediaapi.api.message.dto.MessageSendRequestDTO;
 import com.server.socialmediaapi.model.Message;
+import com.server.socialmediaapi.model.User;
 import com.server.socialmediaapi.repositories.MessageRepository;
+import com.server.socialmediaapi.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -15,41 +19,31 @@ import java.time.LocalDateTime;
 @Transactional(readOnly = true)
 public class MessageService {
     private final MessageRepository messageRepo;
+    private final UserRepository userRepo;
 
     @Transactional
-    public Message sendMessage(Message message){
-        setMessageDateTime(message);
-        return messageRepo.save(message);
+    public Message sendMessage(MessageSendRequestDTO messageDTO){
+        return messageRepo.save(createMessage(messageDTO));
     }
 
-    private void setMessageDateTime(Message message){
-        message.setDateOfCreation(LocalDateTime.now());
-    }
+    public Message createMessage(MessageSendRequestDTO messageDTO){
+        User sender = userRepo.findById(messageDTO.getSender()).get();
+        User consumer = userRepo.findById(messageDTO.getConsumer()).get();
 
-
-    public Page<Message> getMessageHistory(Message message, int page, int size){
-        if(message.getId() != null) {
-            return getMessageHistoryWithBorderMessage(message, page, size);
-        } else {
-            return getMessageHistoryOfLimitlessMessage(message, page, size);
-        }
-    }
-
-
-    private Page<Message> getMessageHistoryWithBorderMessage(Message message, int page, int size){
-        return messageRepo.findAllBySenderAndConsumerAndIdAfterOrderById(
-                message.getSender(),
-                message.getConsumer(),
-                message.getId(),
-                PageRequest.of(page, size));
+        return new Message(
+                sender,
+                consumer,
+                messageDTO.getContent(),
+                LocalDateTime.now()
+        );
     }
 
 
-    private Page<Message> getMessageHistoryOfLimitlessMessage(Message message, int page, int size){
-        return messageRepo.findAllBySenderAndConsumerOrderById(
-                message.getSender(),
-                message.getConsumer(),
-                PageRequest.of(page, size));
+    public Page<Message> getMessageHistory(MessageHistoryRequestDTO messageDTO, int page, int size){
+        User sender = userRepo.findById(messageDTO.getFirstUser()).get();
+        User consumer = userRepo.findById(messageDTO.getSecondUser()).get();
+
+        return messageRepo.search(sender, consumer, PageRequest.of(page, size));
     }
 
 }

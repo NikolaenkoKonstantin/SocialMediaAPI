@@ -21,16 +21,18 @@ public class Message {
     /**
      * Отправитель сообщения
      */
+    @ToString.Exclude
     @ManyToOne
     @JoinColumn(name = "sender", referencedColumnName = "id")
-    private User senderMessage;
+    private User sender;
 
     /**
      * Получатель сообщения
      */
+    @ToString.Exclude
     @ManyToOne
     @JoinColumn(name = "consumer", referencedColumnName = "id")
-    private User consumerMessage;
+    private User consumer;
 
     /**
      * Содержание сообщения
@@ -43,4 +45,12 @@ public class Message {
      */
     @Column(name = "date_of_creation")
     private LocalDateTime dateOfCreation;
+
+
+    public Message(User sender, User consumer, String content, LocalDateTime dateOfCreation) {
+        this.sender = sender;
+        this.consumer = consumer;
+        this.content = content;
+        this.dateOfCreation = dateOfCreation;
+    }
 }

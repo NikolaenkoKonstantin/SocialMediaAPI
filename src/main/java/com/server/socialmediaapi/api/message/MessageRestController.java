@@ -10,6 +10,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -23,16 +24,17 @@ public class MessageRestController {
     @GetMapping
     public Page<MessageResponseDTO> getMessageHistory(@RequestBody @Valid MessageHistoryRequestDTO messageDTO,
                                                       @RequestParam(value = "page", defaultValue = "0") Integer page,
-                                                      @RequestParam(value = "size", defaultValue = "10") Integer size){
-        Message message = converter.convertToMessage(messageDTO);
-        return messageService.getMessageHistory(message, page, size)
+                                                      @RequestParam(value = "size", defaultValue = "10") Integer size,
+                                                      BindingResult bindingResult){
+        return messageService.getMessageHistory(messageDTO, page, size)
                 .map(converter::convertToMessageResponseDTO);
     }
 
 
     @PostMapping
-    public ResponseEntity<MessageResponseDTO> sendMessage(@RequestBody @Valid MessageSendRequestDTO dto){
-        Message message = messageService.sendMessage(converter.convertToMessage(dto));
+    public ResponseEntity<MessageResponseDTO> sendMessage(@RequestBody @Valid MessageSendRequestDTO messageDTO,
+                                                          BindingResult bindingResult){
+        Message message = messageService.sendMessage(messageDTO);
         return ResponseEntity.ok(converter.convertToMessageResponseDTO(message));
     }
 }
