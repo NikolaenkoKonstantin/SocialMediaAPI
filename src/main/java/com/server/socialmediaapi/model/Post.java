@@ -19,6 +19,13 @@ public class Post {
     private int id;
 
     /**
+     * Владелец поста
+     */
+    @ManyToOne
+    @JoinColumn(name = "owner", referencedColumnName = "id")
+    private User owner;
+
+    /**
      * Заголовок поста
      */
     @Column(name = "title")

@@ -19,12 +19,14 @@ public class Subscription {
     /**
      * Подписчик
      */
-    @Column(name = "subscriber")
-    private int subscriber;
+    @ManyToOne
+    @JoinColumn(name = "subscriber", referencedColumnName = "id")
+    private User subscriber;
 
     /**
      * Издатель
      */
-    @Column(name = "publisher")
-    private int publisher;
+    @ManyToOne
+    @JoinColumn(name = "publisher", referencedColumnName = "id")
+    private User publisher;
 }

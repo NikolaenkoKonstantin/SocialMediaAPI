@@ -19,16 +19,18 @@ public class Message {
     private Integer id;
 
     /**
-     * Отправитель
+     * Отправитель сообщения
      */
-    @Column(name = "sender")
-    private int sender;
+    @ManyToOne
+    @JoinColumn(name = "sender", referencedColumnName = "id")
+    private User senderMessage;
 
     /**
-     * Получатель
+     * Получатель сообщения
      */
-    @Column(name = "consumer")
-    private int consumer;
+    @ManyToOne
+    @JoinColumn(name = "consumer", referencedColumnName = "id")
+    private User consumerMessage;
 
     /**
      * Содержание сообщения
