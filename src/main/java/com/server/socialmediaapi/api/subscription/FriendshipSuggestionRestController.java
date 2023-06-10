@@ -9,10 +9,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
@@ -22,7 +19,7 @@ public class FriendshipSuggestionRestController {
     private final SubscriptionService subscriptionService;
     private final FriendshipSuggestionService friendshipSuggestionService;
 
-    @PostMapping("/accept")
+    @PutMapping("/accept")
     public void acceptFriendship(@RequestBody FriendshipSuggestionRequest requestDTO){
 
     }
@@ -36,13 +33,13 @@ public class FriendshipSuggestionRestController {
     }
 
 
-    @PostMapping("/unsubscribe")
+    @PutMapping("/unsubscribe")
     public ResponseEntity<HttpStatus> unsubscribe(){
         return null;
     }
 
 
-    @PostMapping("/reject")
+    @PutMapping("/reject")
     public ResponseEntity<HttpStatus> rejectFriendship(){
         return null;
     }
