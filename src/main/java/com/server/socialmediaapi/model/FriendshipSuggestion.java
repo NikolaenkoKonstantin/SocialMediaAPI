@@ -19,14 +19,22 @@ public class FriendshipSuggestion {
     /**
      * Отправитель заявки в друзья
      */
+    @ToString.Exclude
     @ManyToOne
     @JoinColumn(name = "sender", referencedColumnName = "id")
-    private User senderFriendship;
+    private User sender;
 
     /**
      * Получатель заявки в друзья
      */
+    @ToString.Exclude
     @ManyToOne
     @JoinColumn(name = "consumer", referencedColumnName = "id")
-    private User consumerFriendship;
+    private User consumer;
+
+
+    public FriendshipSuggestion(User sender, User consumer) {
+        this.sender = sender;
+        this.consumer = consumer;
+    }
 }
