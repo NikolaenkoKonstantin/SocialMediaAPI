@@ -26,7 +26,7 @@ public class MessageService {
         return messageRepo.save(createMessage(messageDTO));
     }
 
-    public Message createMessage(MessageSendRequestDTO messageDTO){
+    private Message createMessage(MessageSendRequestDTO messageDTO){
         User sender = userRepo.findById(messageDTO.getSender()).get();
         User consumer = userRepo.findById(messageDTO.getConsumer()).get();
 

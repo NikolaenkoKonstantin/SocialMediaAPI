@@ -9,9 +9,6 @@ import org.springframework.stereotype.Component;
 @Component
 @RequiredArgsConstructor
 public class MessageConverter {
-    private final ModelMapper modelMapper;
-
-
     public MessageResponseDTO convertToMessageResponseDTO(Message message){
         return new MessageResponseDTO(
                 message.getId(),

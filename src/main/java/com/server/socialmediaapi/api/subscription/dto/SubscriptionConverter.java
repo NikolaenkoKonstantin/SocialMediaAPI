@@ -8,8 +8,6 @@ import org.springframework.stereotype.Component;
 @Component
 @RequiredArgsConstructor
 public class SubscriptionConverter {
-    private final ModelMapper modelMapper;
-
     public SubscriptionResponseDTO convertToSubscriptionResponseDTO(Subscription subscription){
         return new SubscriptionResponseDTO(
                 subscription.getId(),
