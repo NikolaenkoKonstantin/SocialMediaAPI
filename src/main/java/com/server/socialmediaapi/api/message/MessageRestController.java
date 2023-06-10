@@ -24,16 +24,14 @@ public class MessageRestController {
     @GetMapping
     public Page<MessageResponse> getMessageHistory(@RequestBody @Valid MessageHistoryRequest messageDTO,
                                                    @RequestParam(value = "page", defaultValue = "0") Integer page,
-                                                   @RequestParam(value = "size", defaultValue = "10") Integer size,
-                                                   BindingResult bindingResult){
+                                                   @RequestParam(value = "size", defaultValue = "10") Integer size){
         return messageService.getMessageHistory(messageDTO, page, size)
                 .map(converter::convertToMessageResponseDTO);
     }
 
 
     @PostMapping
-    public ResponseEntity<MessageResponse> sendMessage(@RequestBody @Valid MessageSendRequest messageDTO,
-                                                       BindingResult bindingResult){
+    public ResponseEntity<MessageResponse> sendMessage(@RequestBody @Valid MessageSendRequest messageDTO){
         Message message = messageService.sendMessage(messageDTO);
         return ResponseEntity.ok(converter.convertToMessageResponseDTO(message));
     }

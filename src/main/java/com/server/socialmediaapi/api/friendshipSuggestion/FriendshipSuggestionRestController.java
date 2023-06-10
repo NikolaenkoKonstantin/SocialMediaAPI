@@ -14,34 +14,34 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 @RequestMapping("/friendshipSuggestion")
 public class FriendshipSuggestionRestController {
-    private final SubscriptionConverter converter;
-    private final SubscriptionService subscriptionService;
     private final FriendshipSuggestionService friendshipSuggestionService;
 
+
     @PutMapping("/accept")
-    public ResponseEntity<HttpStatus> acceptFriendshipSuggestion(@RequestBody FriendshipSuggestionAcceptRequest dto){
+    public ResponseEntity<HttpStatus> acceptFriendshipSuggestion(
+            @RequestBody @Valid FriendshipSuggestionAcceptRequest dto){
         friendshipSuggestionService.acceptFriendshipSuggestion(dto);
         return ResponseEntity.ok(HttpStatus.OK);
     }
 
 
     @PostMapping("/suggest")
-    public ResponseEntity<HttpStatus> suggestFriendship(@RequestBody @Valid FriendshipSuggestionRequest dto,
-                                                             BindingResult bindingResult){
+    public ResponseEntity<HttpStatus> suggestFriendship(@RequestBody @Valid FriendshipSuggestionRequest dto){
         friendshipSuggestionService.suggestFriendshipSuggestion(dto);
         return ResponseEntity.ok(HttpStatus.OK);
     }
 
 
     @PutMapping("/cancel")
-    public ResponseEntity<HttpStatus> cancelFriendshipSuggestion(@RequestBody FriendshipSuggestionCancelRequest dto){
+    public ResponseEntity<HttpStatus> cancelFriendshipSuggestion(
+            @RequestBody @Valid FriendshipSuggestionCancelRequest dto){
         friendshipSuggestionService.cancelFriendshipSuggestion(dto);
         return ResponseEntity.ok(HttpStatus.OK);
     }
 
 
     @PutMapping("/reject")
-    public ResponseEntity<HttpStatus> rejectFriendship(@RequestBody FriendshipSuggestionRejectRequest dto){
+    public ResponseEntity<HttpStatus> rejectFriendship(@RequestBody @Valid FriendshipSuggestionRejectRequest dto){
         friendshipSuggestionService.rejectFriendshipSuggestion(dto);
         return ResponseEntity.ok(HttpStatus.OK);
     }
