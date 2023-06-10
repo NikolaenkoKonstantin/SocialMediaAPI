@@ -20,7 +20,7 @@ public class MessageRestController {
     private final MessageService messageService;
     private final MessageConverter converter;
 
-    //С пагинацией
+    //добавить проверку валидации, исключения с ошибками
     @GetMapping
     public Page<MessageResponseDTO> getMessageHistory(@RequestBody @Valid MessageHistoryRequestDTO messageDTO,
                                                       @RequestParam(value = "page", defaultValue = "0") Integer page,
