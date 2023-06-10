@@ -4,6 +4,5 @@ CREATE TABLE post
     owner            int references "user" (id) not null,
     title            varchar(100)               not null,
     content          varchar(1000)              not null,
-    date_of_creation timestamp                  not null,
-    image            int unique                 not null
+    date_of_creation timestamp                  not null
 )
