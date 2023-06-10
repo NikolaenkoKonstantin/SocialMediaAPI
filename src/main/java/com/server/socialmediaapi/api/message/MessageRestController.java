@@ -1,9 +1,9 @@
 package com.server.socialmediaapi.api.message;
 
 import com.server.socialmediaapi.api.message.dto.MessageConverter;
-import com.server.socialmediaapi.api.message.dto.MessageHistoryRequestDTO;
-import com.server.socialmediaapi.api.message.dto.MessageResponseDTO;
-import com.server.socialmediaapi.api.message.dto.MessageSendRequestDTO;
+import com.server.socialmediaapi.api.message.dto.MessageHistoryRequest;
+import com.server.socialmediaapi.api.message.dto.MessageResponse;
+import com.server.socialmediaapi.api.message.dto.MessageSendRequest;
 import com.server.socialmediaapi.model.Message;
 import com.server.socialmediaapi.services.MessageService;
 import jakarta.validation.Valid;
@@ -22,18 +22,18 @@ public class MessageRestController {
 
     //добавить проверку валидации, исключения с ошибками
     @GetMapping
-    public Page<MessageResponseDTO> getMessageHistory(@RequestBody @Valid MessageHistoryRequestDTO messageDTO,
-                                                      @RequestParam(value = "page", defaultValue = "0") Integer page,
-                                                      @RequestParam(value = "size", defaultValue = "10") Integer size,
-                                                      BindingResult bindingResult){
+    public Page<MessageResponse> getMessageHistory(@RequestBody @Valid MessageHistoryRequest messageDTO,
+                                                   @RequestParam(value = "page", defaultValue = "0") Integer page,
+                                                   @RequestParam(value = "size", defaultValue = "10") Integer size,
+                                                   BindingResult bindingResult){
         return messageService.getMessageHistory(messageDTO, page, size)
                 .map(converter::convertToMessageResponseDTO);
     }
 
 
     @PostMapping
-    public ResponseEntity<MessageResponseDTO> sendMessage(@RequestBody @Valid MessageSendRequestDTO messageDTO,
-                                                          BindingResult bindingResult){
+    public ResponseEntity<MessageResponse> sendMessage(@RequestBody @Valid MessageSendRequest messageDTO,
+                                                       BindingResult bindingResult){
         Message message = messageService.sendMessage(messageDTO);
         return ResponseEntity.ok(converter.convertToMessageResponseDTO(message));
     }

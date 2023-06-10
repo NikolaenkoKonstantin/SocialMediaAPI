@@ -8,8 +8,8 @@ import org.springframework.stereotype.Component;
 @Component
 @RequiredArgsConstructor
 public class SubscriptionConverter {
-    public SubscriptionResponseDTO convertToSubscriptionResponseDTO(Subscription subscription){
-        return new SubscriptionResponseDTO(
+    public SubscriptionResponse convertToSubscriptionResponseDTO(Subscription subscription){
+        return new SubscriptionResponse(
                 subscription.getId(),
                 subscription.getSubscriber().getId(),
                 subscription.getPublisher().getId()

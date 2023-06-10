@@ -1,6 +1,6 @@
 package com.server.socialmediaapi.services;
 
-import com.server.socialmediaapi.api.subscription.dto.FriendshipSuggestionRequestDTO;
+import com.server.socialmediaapi.api.subscription.dto.FriendshipSuggestionRequest;
 import com.server.socialmediaapi.model.Subscription;
 import com.server.socialmediaapi.model.User;
 import com.server.socialmediaapi.repositories.SubscriptionRepository;
@@ -17,12 +17,12 @@ public class SubscriptionService {
     private final UserRepository userRepo;
 
     @Transactional
-    public void subscribe(FriendshipSuggestionRequestDTO subscriptionDTO){
+    public void subscribe(FriendshipSuggestionRequest subscriptionDTO){
         subscriptionRepo.save(createSubscription(subscriptionDTO));
     }
 
 
-    private Subscription createSubscription(FriendshipSuggestionRequestDTO subscriptionDTO) {
+    private Subscription createSubscription(FriendshipSuggestionRequest subscriptionDTO) {
         User subscriber = userRepo.findById(subscriptionDTO.getSender()).get();
         User publisher = userRepo.findById(subscriptionDTO.getConsumer()).get();
 

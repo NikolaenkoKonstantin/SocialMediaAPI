@@ -1,9 +1,7 @@
 package com.server.socialmediaapi.api.subscription;
 
 import com.server.socialmediaapi.api.subscription.dto.SubscriptionConverter;
-import com.server.socialmediaapi.api.subscription.dto.FriendshipSuggestionRequestDTO;
-import com.server.socialmediaapi.api.subscription.dto.SubscriptionResponseDTO;
-import com.server.socialmediaapi.model.Subscription;
+import com.server.socialmediaapi.api.subscription.dto.FriendshipSuggestionRequest;
 import com.server.socialmediaapi.services.FriendshipSuggestionService;
 import com.server.socialmediaapi.services.SubscriptionService;
 import jakarta.validation.Valid;
@@ -25,13 +23,13 @@ public class FriendshipSuggestionRestController {
     private final FriendshipSuggestionService friendshipSuggestionService;
 
     @PostMapping("/accept")
-    public void acceptFriendship(@RequestBody FriendshipSuggestionRequestDTO requestDTO){
+    public void acceptFriendship(@RequestBody FriendshipSuggestionRequest requestDTO){
 
     }
 
 
     @PostMapping("/suggest")
-    public ResponseEntity<HttpStatus> suggestFriendship(@RequestBody @Valid FriendshipSuggestionRequestDTO requestDTO,
+    public ResponseEntity<HttpStatus> suggestFriendship(@RequestBody @Valid FriendshipSuggestionRequest requestDTO,
                                                              BindingResult bindingResult){
         friendshipSuggestionService.suggestFriendship(requestDTO);
         return ResponseEntity.ok(HttpStatus.OK);

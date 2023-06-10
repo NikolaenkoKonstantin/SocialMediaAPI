@@ -7,7 +7,7 @@ import lombok.*;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
-public class FriendshipSuggestionRequestDTO {
+public class FriendshipSuggestionRequest {
     private int sender;
 
     private int consumer;

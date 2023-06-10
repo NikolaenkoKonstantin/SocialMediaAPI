@@ -7,7 +7,7 @@ import lombok.*;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
-public class SubscriptionResponseDTO {
+public class SubscriptionResponse {
     private int id;
 
     private int subscriber;

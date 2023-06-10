@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
-public class MessageResponseDTO {
+public class MessageResponse {
     private Integer id;
 
     private int sender;

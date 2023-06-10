@@ -1,7 +1,6 @@
 package com.server.socialmediaapi.api.message.dto;
 
 import com.server.socialmediaapi.model.Message;
-import jakarta.mail.MessageAware;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
@@ -9,8 +8,8 @@ import org.springframework.stereotype.Component;
 @Component
 @RequiredArgsConstructor
 public class MessageConverter {
-    public MessageResponseDTO convertToMessageResponseDTO(Message message){
-        return new MessageResponseDTO(
+    public MessageResponse convertToMessageResponseDTO(Message message){
+        return new MessageResponse(
                 message.getId(),
                 message.getSender().getId(),
                 message.getConsumer().getId(),

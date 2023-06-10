@@ -1,7 +1,7 @@
 package com.server.socialmediaapi.services;
 
-import com.server.socialmediaapi.api.message.dto.MessageHistoryRequestDTO;
-import com.server.socialmediaapi.api.message.dto.MessageSendRequestDTO;
+import com.server.socialmediaapi.api.message.dto.MessageHistoryRequest;
+import com.server.socialmediaapi.api.message.dto.MessageSendRequest;
 import com.server.socialmediaapi.model.Message;
 import com.server.socialmediaapi.model.User;
 import com.server.socialmediaapi.repositories.MessageRepository;
@@ -22,11 +22,11 @@ public class MessageService {
     private final UserRepository userRepo;
 
     @Transactional
-    public Message sendMessage(MessageSendRequestDTO messageDTO){
+    public Message sendMessage(MessageSendRequest messageDTO){
         return messageRepo.save(createMessage(messageDTO));
     }
 
-    private Message createMessage(MessageSendRequestDTO messageDTO){
+    private Message createMessage(MessageSendRequest messageDTO){
         User sender = userRepo.findById(messageDTO.getSender()).get();
         User consumer = userRepo.findById(messageDTO.getConsumer()).get();
 
@@ -39,7 +39,7 @@ public class MessageService {
     }
 
 
-    public Page<Message> getMessageHistory(MessageHistoryRequestDTO messageDTO, int page, int size){
+    public Page<Message> getMessageHistory(MessageHistoryRequest messageDTO, int page, int size){
         User sender = userRepo.findById(messageDTO.getFirstUser()).get();
         User consumer = userRepo.findById(messageDTO.getSecondUser()).get();
 
