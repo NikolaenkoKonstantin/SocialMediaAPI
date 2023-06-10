@@ -2,7 +2,6 @@ package com.server.socialmediaapi.api.message.dto;
 
 import com.server.socialmediaapi.model.Message;
 import lombok.RequiredArgsConstructor;
-import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
 
 @Component

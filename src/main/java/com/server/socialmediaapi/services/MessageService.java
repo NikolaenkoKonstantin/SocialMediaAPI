@@ -22,26 +22,23 @@ public class MessageService {
     private final UserRepository userRepo;
 
     @Transactional
-    public Message sendMessage(MessageSendRequest messageDTO){
-        return messageRepo.save(createMessage(messageDTO));
+    public Message sendMessage(MessageSendRequest dto){
+        return messageRepo.save(createMessage(dto));
     }
 
-    private Message createMessage(MessageSendRequest messageDTO){
-        User sender = userRepo.findById(messageDTO.getSender()).get();
-        User consumer = userRepo.findById(messageDTO.getConsumer()).get();
-
+    private Message createMessage(MessageSendRequest dto){
         return new Message(
-                sender,
-                consumer,
-                messageDTO.getContent(),
+                userRepo.findById(dto.getSender()).get(),
+                userRepo.findById(dto.getConsumer()).get(),
+                dto.getContent(),
                 LocalDateTime.now()
         );
     }
 
 
-    public Page<Message> getMessageHistory(MessageHistoryRequest messageDTO, int page, int size){
-        User sender = userRepo.findById(messageDTO.getFirstUser()).get();
-        User consumer = userRepo.findById(messageDTO.getSecondUser()).get();
+    public Page<Message> getMessageHistory(MessageHistoryRequest dto, int page, int size){
+        User sender = userRepo.findById(dto.getFirstUser()).get();
+        User consumer = userRepo.findById(dto.getSecondUser()).get();
 
         return messageRepo.search(sender, consumer, PageRequest.of(page, size));
     }
