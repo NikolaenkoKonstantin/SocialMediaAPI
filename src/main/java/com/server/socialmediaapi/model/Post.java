@@ -21,6 +21,7 @@ public class Post {
     /**
      * Владелец поста
      */
+    @ToString.Exclude
     @ManyToOne
     @JoinColumn(name = "owner", referencedColumnName = "id")
     private User owner;

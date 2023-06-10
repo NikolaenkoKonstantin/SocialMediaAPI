@@ -11,6 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 @RequestMapping("/post")
 public class PostRestController {
 
+    //С пагинацией
     @GetMapping
     public ResponseEntity<HttpStatus> getPosts(){
         return null;
