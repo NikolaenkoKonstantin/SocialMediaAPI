@@ -4,8 +4,8 @@ import com.server.socialmediaapi.api.friendshipSuggestion.dto.FriendshipSuggesti
 import com.server.socialmediaapi.api.friendshipSuggestion.dto.FriendshipSuggestionCancelRequest;
 import com.server.socialmediaapi.api.friendshipSuggestion.dto.FriendshipSuggestionRejectRequest;
 import com.server.socialmediaapi.api.friendshipSuggestion.dto.FriendshipSuggestionRequest;
-import com.server.socialmediaapi.model.FriendshipSuggestion;
-import com.server.socialmediaapi.model.User;
+import com.server.socialmediaapi.models.FriendshipSuggestion;
+import com.server.socialmediaapi.models.User;
 import com.server.socialmediaapi.repositories.FriendshipSuggestionRepository;
 import com.server.socialmediaapi.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;

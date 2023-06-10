@@ -1,9 +1,7 @@
-package com.server.socialmediaapi.model;
+package com.server.socialmediaapi.models;
 
 import jakarta.persistence.*;
 import lombok.*;
-
-import java.util.List;
 
 @Setter
 @Getter

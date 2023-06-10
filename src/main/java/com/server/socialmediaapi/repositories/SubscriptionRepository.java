@@ -1,7 +1,7 @@
 package com.server.socialmediaapi.repositories;
 
-import com.server.socialmediaapi.model.Subscription;
-import com.server.socialmediaapi.model.User;
+import com.server.socialmediaapi.models.Subscription;
+import com.server.socialmediaapi.models.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

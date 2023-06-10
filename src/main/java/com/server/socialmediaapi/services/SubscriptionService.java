@@ -1,7 +1,6 @@
 package com.server.socialmediaapi.services;
 
-import com.server.socialmediaapi.model.Subscription;
-import com.server.socialmediaapi.model.User;
+import com.server.socialmediaapi.models.Subscription;
 import com.server.socialmediaapi.repositories.SubscriptionRepository;
 import com.server.socialmediaapi.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;

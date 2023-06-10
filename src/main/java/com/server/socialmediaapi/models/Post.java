@@ -1,4 +1,4 @@
-package com.server.socialmediaapi.model;
+package com.server.socialmediaapi.models;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -44,10 +44,11 @@ public class Post {
     @Column(name = "date_of_creation")
     private LocalDateTime dateOfCreation;
 
-    /**
-     * Данные о изображении
-     * пока что временная заглушка
-     */
-    @Column(name = "image")
-    private int image; //будет какая то информация по изображению
+
+    public Post(User owner, String title, String content, LocalDateTime dateOfCreation) {
+        this.owner = owner;
+        this.title = title;
+        this.content = content;
+        this.dateOfCreation = dateOfCreation;
+    }
 }

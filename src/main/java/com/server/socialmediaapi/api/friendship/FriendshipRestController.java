@@ -2,6 +2,7 @@ package com.server.socialmediaapi.api.friendship;
 
 import com.server.socialmediaapi.api.friendship.dto.FriendshipStopRequest;
 import com.server.socialmediaapi.services.FriendshipService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,7 +19,7 @@ public class FriendshipRestController {
 
 
     @PutMapping("/stop")
-    public ResponseEntity<HttpStatus> stopFriendship(@RequestBody FriendshipStopRequest dto){
+    public ResponseEntity<HttpStatus> stopFriendship(@RequestBody @Valid FriendshipStopRequest dto){
         friendshipService.stopFriendship(dto);
         return ResponseEntity.ok(HttpStatus.OK);
     }

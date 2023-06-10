@@ -2,8 +2,8 @@ package com.server.socialmediaapi.services;
 
 import com.server.socialmediaapi.api.message.dto.MessageHistoryRequest;
 import com.server.socialmediaapi.api.message.dto.MessageSendRequest;
-import com.server.socialmediaapi.model.Message;
-import com.server.socialmediaapi.model.User;
+import com.server.socialmediaapi.models.Message;
+import com.server.socialmediaapi.models.User;
 import com.server.socialmediaapi.repositories.MessageRepository;
 import com.server.socialmediaapi.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;

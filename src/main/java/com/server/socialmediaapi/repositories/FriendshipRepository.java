@@ -1,7 +1,7 @@
 package com.server.socialmediaapi.repositories;
 
-import com.server.socialmediaapi.model.Friendship;
-import com.server.socialmediaapi.model.User;
+import com.server.socialmediaapi.models.Friendship;
+import com.server.socialmediaapi.models.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
