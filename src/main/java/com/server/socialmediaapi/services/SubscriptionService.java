@@ -1,6 +1,5 @@
 package com.server.socialmediaapi.services;
 
-import com.server.socialmediaapi.api.subscription.dto.FriendshipSuggestionRequest;
 import com.server.socialmediaapi.model.Subscription;
 import com.server.socialmediaapi.model.User;
 import com.server.socialmediaapi.repositories.SubscriptionRepository;
@@ -16,31 +15,26 @@ public class SubscriptionService {
     private final SubscriptionRepository subscriptionRepo;
     private final UserRepository userRepo;
 
+
     @Transactional
-    public void subscribe(FriendshipSuggestionRequest subscriptionDTO){
-        subscriptionRepo.save(createSubscription(subscriptionDTO));
+    public void subscribe(int subscriber, int publisher){
+        subscriptionRepo.save(createSubscription(subscriber, publisher));
     }
 
 
-    private Subscription createSubscription(FriendshipSuggestionRequest subscriptionDTO) {
-        User subscriber = userRepo.findById(subscriptionDTO.getSender()).get();
-        User publisher = userRepo.findById(subscriptionDTO.getConsumer()).get();
-
-        return new Subscription(subscriber, publisher, "subscription");
+    private Subscription createSubscription(int subscriber, int publisher) {
+        return new Subscription(
+                userRepo.findById(subscriber).get(),
+                userRepo.findById(publisher).get()
+        );
     }
 
 
-    //Ещё не настроен до конца
     @Transactional
-    public void unsubscribe(Subscription subscription){
-        subscriptionRepo.delete(subscription);
+    public void unsubscribe(int subscriber, int publisher){
+        subscriptionRepo.deleteBySubscriberAndPublisher(
+                userRepo.findById(subscriber).get(),
+                userRepo.findById(publisher).get()
+        );
     }
-
-
-    //Ещё не настроен до конца
-    @Transactional
-    public Subscription rejectFriendship(Subscription subscription){
-        return subscriptionRepo.save(subscription);
-    }
-
 }

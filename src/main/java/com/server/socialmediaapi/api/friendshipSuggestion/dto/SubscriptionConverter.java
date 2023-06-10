@@ -1,8 +1,7 @@
-package com.server.socialmediaapi.api.subscription.dto;
+package com.server.socialmediaapi.api.friendshipSuggestion.dto;
 
 import com.server.socialmediaapi.model.Subscription;
 import lombok.RequiredArgsConstructor;
-import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
 
 @Component

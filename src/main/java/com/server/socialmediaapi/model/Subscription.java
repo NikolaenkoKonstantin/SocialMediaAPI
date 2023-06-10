@@ -32,17 +32,9 @@ public class Subscription {
     @JoinColumn(name = "publisher", referencedColumnName = "id")
     private User publisher;
 
-    @Column(name = "type")
-    private String type;
 
     public Subscription(User subscriber, User publisher) {
         this.subscriber = subscriber;
         this.publisher = publisher;
-    }
-
-    public Subscription(User subscriber, User publisher, String type) {
-        this.subscriber = subscriber;
-        this.publisher = publisher;
-        this.type = type;
     }
 }

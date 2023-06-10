@@ -1,4 +1,4 @@
-package com.server.socialmediaapi.api.subscription.dto;
+package com.server.socialmediaapi.api.friendshipSuggestion.dto;
 
 import lombok.*;
 
