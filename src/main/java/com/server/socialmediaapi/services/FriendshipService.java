@@ -1,8 +1,8 @@
 package com.server.socialmediaapi.services;
 
 import com.server.socialmediaapi.api.friendship.dto.FriendshipStopRequest;
-import com.server.socialmediaapi.model.Friendship;
-import com.server.socialmediaapi.model.User;
+import com.server.socialmediaapi.models.Friendship;
+import com.server.socialmediaapi.models.User;
 import com.server.socialmediaapi.repositories.FriendshipRepository;
 import com.server.socialmediaapi.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;

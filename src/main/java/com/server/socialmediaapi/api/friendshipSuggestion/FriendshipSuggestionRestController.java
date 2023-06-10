@@ -2,12 +2,10 @@ package com.server.socialmediaapi.api.friendshipSuggestion;
 
 import com.server.socialmediaapi.api.friendshipSuggestion.dto.*;
 import com.server.socialmediaapi.services.FriendshipSuggestionService;
-import com.server.socialmediaapi.services.SubscriptionService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 @RestController

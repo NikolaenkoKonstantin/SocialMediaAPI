@@ -2,13 +2,12 @@ package com.server.socialmediaapi.services;
 
 import com.server.socialmediaapi.api.post.dto.PostCreateRequest;
 import com.server.socialmediaapi.api.post.dto.PostUpdateRequest;
-import com.server.socialmediaapi.model.Post;
+import com.server.socialmediaapi.models.Post;
 import com.server.socialmediaapi.repositories.PostRepository;
 import com.server.socialmediaapi.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

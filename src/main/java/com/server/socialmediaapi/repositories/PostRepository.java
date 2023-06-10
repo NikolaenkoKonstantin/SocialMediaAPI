@@ -1,7 +1,7 @@
 package com.server.socialmediaapi.repositories;
 
-import com.server.socialmediaapi.model.Post;
-import com.server.socialmediaapi.model.User;
+import com.server.socialmediaapi.models.Post;
+import com.server.socialmediaapi.models.User;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;

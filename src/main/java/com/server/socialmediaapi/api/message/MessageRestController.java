@@ -4,13 +4,12 @@ import com.server.socialmediaapi.api.message.dto.MessageConverter;
 import com.server.socialmediaapi.api.message.dto.MessageHistoryRequest;
 import com.server.socialmediaapi.api.message.dto.MessageResponse;
 import com.server.socialmediaapi.api.message.dto.MessageSendRequest;
-import com.server.socialmediaapi.model.Message;
+import com.server.socialmediaapi.models.Message;
 import com.server.socialmediaapi.services.MessageService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 @RestController

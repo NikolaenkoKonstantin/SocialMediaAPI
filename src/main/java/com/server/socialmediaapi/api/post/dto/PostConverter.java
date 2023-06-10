@@ -1,6 +1,6 @@
 package com.server.socialmediaapi.api.post.dto;
 
-import com.server.socialmediaapi.model.Post;
+import com.server.socialmediaapi.models.Post;
 import org.springframework.stereotype.Component;
 
 @Component
