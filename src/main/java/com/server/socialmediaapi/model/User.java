@@ -39,42 +39,49 @@ public class User {
     /**
      * Список постов пользователя
      */
+    @ToString.Exclude
     @OneToMany(mappedBy = "owner")
     private List<Post> posts;
 
     /**
      * Список подписок пользователя
      */
+    @ToString.Exclude
     @OneToMany(mappedBy = "publisher")
     private List<Subscription> subscriptions;
 
     /**
      * Список подписчиков пользователя
      */
+    @ToString.Exclude
     @OneToMany(mappedBy = "subscriber")
     private List<Subscription> subscribers;
 
     /**
      * Список отправленных заявок в друзья
      */
-    @OneToMany(mappedBy = "senderFriendship")
+    @ToString.Exclude
+    @OneToMany(mappedBy = "sender")
     private List<FriendshipSuggestion> listOfFriendRequestsSent;
 
     /**
      * Список полученных заявок в друзья
      */
-    @OneToMany(mappedBy = "consumerFriendship")
+    @ToString.Exclude
+    @OneToMany(mappedBy = "consumer")
     private List<FriendshipSuggestion> listOfReceivedFriendRequests;
 
     /**
      * Список отправленных сообщений
      */
-    @OneToMany(mappedBy = "senderMessage")
-    private List<FriendshipSuggestion> listOfSentMessages;
+    @ToString.Exclude
+    @OneToMany(mappedBy = "sender")
+    private List<Message> listOfSentMessages;
 
     /**
      * Список полученных сообщений
      */
-    @OneToMany(mappedBy = "consumerMessage")
-    private List<FriendshipSuggestion> listOfReceivedMessages;
+    @ToString.Exclude
+    @OneToMany(mappedBy = "consumer")
+    private List<Message> listOfReceivedMessages;
 }
