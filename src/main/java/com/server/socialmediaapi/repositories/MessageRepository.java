@@ -19,8 +19,8 @@ public interface MessageRepository extends JpaRepository<Message, Integer> {
      * @return страница с историей сообщений
      */
     @Query("select m from Message m " +
-            "where m.sender = :firstUser and m.consumer = :secondUser " +
-            "or m.sender = :secondUser and m.consumer = :firstUser " +
+            "where (m.sender = :firstUser and m.consumer = :secondUser) " +
+            "or (m.sender = :secondUser and m.consumer = :firstUser) " +
             "order by m.dateOfCreation")
     Page<Message> search(@Param("firstUser") User firstUser,
                          @Param("secondUser") User secondUser,
