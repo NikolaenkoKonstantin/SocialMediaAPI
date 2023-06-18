@@ -30,8 +30,8 @@ public class FriendshipService {
 
     private void deleteFriendship(int senderStopFriendship, int recipientStopFriendship) {
         friendshipRepo.delete(
-                userRepo.findById(senderStopFriendship).get(),
-                userRepo.findById(recipientStopFriendship).get()
+                userRepo.getOrThrow(senderStopFriendship),
+                userRepo.getOrThrow(recipientStopFriendship)
         );
     }
 
@@ -43,8 +43,8 @@ public class FriendshipService {
 
 
     private Friendship createFriendship(int first, int second) {
-        User firstUser = userRepo.findById(first).get();
-        User secondUser = userRepo.findById(second).get();
+        User firstUser = userRepo.getOrThrow(first);
+        User secondUser = userRepo.getOrThrow(second);
 
         return new Friendship(firstUser, secondUser);
     }

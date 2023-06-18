@@ -23,7 +23,7 @@ public class PostService {
 
     public Page<Post> getPosts(int subscriber, int page, int size){
         return postRepo.search(
-                userRepo.findById(subscriber).get(),
+                userRepo.getOrThrow(subscriber),
                 PageRequest.of(page, size)
         );
     }
@@ -36,7 +36,7 @@ public class PostService {
 
 
     private Post editPost(int id, PostUpdateRequest dto) {
-        Post post = postRepo.findById(id).get();
+        Post post = postRepo.getOrThrow(id);
 
         post.setTitle(dto.getTitle());
         post.setContent(dto.getContent());
@@ -59,7 +59,7 @@ public class PostService {
 
     private Post createPost(PostCreateRequest dto) {
         return new Post(
-                userRepo.findById(dto.getOwner()).get(),
+                userRepo.getOrThrow(dto.getOwner()),
                 dto.getTitle(),
                 dto.getContent(),
                 LocalDateTime.now()

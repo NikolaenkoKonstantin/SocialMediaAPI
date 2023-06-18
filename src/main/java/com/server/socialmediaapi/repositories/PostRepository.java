@@ -1,5 +1,6 @@
 package com.server.socialmediaapi.repositories;
 
+import com.server.socialmediaapi.exceptions.NotFoundException;
 import com.server.socialmediaapi.models.Post;
 import com.server.socialmediaapi.models.User;
 import org.springframework.data.domain.Page;
@@ -22,4 +23,8 @@ public interface PostRepository extends JpaRepository<Post, Integer> {
             "on p.owner = s.publisher " +
             "where s.subscriber = :subscriber" )
     Page<Post> search(@Param("subscriber") User subscriber, Pageable pageable);
+
+    default Post getOrThrow(int id){
+        return findById(id).orElseThrow(() -> new NotFoundException("Post is not found"));
+    }
 }
