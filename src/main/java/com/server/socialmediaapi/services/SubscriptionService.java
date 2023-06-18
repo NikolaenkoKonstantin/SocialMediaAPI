@@ -23,8 +23,8 @@ public class SubscriptionService {
 
     private Subscription createSubscription(int subscriber, int publisher) {
         return new Subscription(
-                userRepo.findById(subscriber).get(),
-                userRepo.findById(publisher).get()
+                userRepo.getOrThrow(subscriber),
+                userRepo.getOrThrow(publisher)
         );
     }
 
@@ -32,8 +32,8 @@ public class SubscriptionService {
     @Transactional
     public void unsubscribe(int subscriber, int publisher){
         subscriptionRepo.deleteBySubscriberAndPublisher(
-                userRepo.findById(subscriber).get(),
-                userRepo.findById(publisher).get()
+                userRepo.getOrThrow(subscriber),
+                userRepo.getOrThrow(publisher)
         );
     }
 }

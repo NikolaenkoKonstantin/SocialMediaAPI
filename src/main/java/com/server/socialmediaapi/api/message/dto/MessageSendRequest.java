@@ -10,12 +10,12 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 public class MessageSendRequest {
-    @Min(value = 0, message = "sender id cannot be less than 0")
+    @Min(value = 1, message = "sender id cannot be less than 0")
     private int sender;
 
-    @Min(value = 0, message = "consumer id cannot be less than 0")
+    @Min(value = 1, message = "consumer id cannot be less than 0")
     private int consumer;
 
-    @Size(max = 500, message = "The message field cannot have more than 500 characters")
+    @Size(min = 1, max = 500, message = "The message field cannot have more than 500 characters")
     private String content;
 }

@@ -3,7 +3,6 @@ package com.server.socialmediaapi.services;
 import com.server.socialmediaapi.api.message.dto.MessageHistoryRequest;
 import com.server.socialmediaapi.api.message.dto.MessageSendRequest;
 import com.server.socialmediaapi.models.Message;
-import com.server.socialmediaapi.models.User;
 import com.server.socialmediaapi.repositories.MessageRepository;
 import com.server.socialmediaapi.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -28,8 +27,8 @@ public class MessageService {
 
     private Message createMessage(MessageSendRequest dto){
         return new Message(
-                userRepo.findById(dto.getSender()).get(),
-                userRepo.findById(dto.getConsumer()).get(),
+                userRepo.getOrThrow(dto.getSender()),
+                userRepo.getOrThrow(dto.getConsumer()),
                 dto.getContent(),
                 LocalDateTime.now()
         );
@@ -37,10 +36,10 @@ public class MessageService {
 
 
     public Page<Message> getMessageHistory(MessageHistoryRequest dto, int page, int size){
-        User sender = userRepo.findById(dto.getFirstUser()).get();
-        User consumer = userRepo.findById(dto.getSecondUser()).get();
-
-        return messageRepo.search(sender, consumer, PageRequest.of(page, size));
+        return messageRepo.search(
+                userRepo.getOrThrow(dto.getFirstUser()),
+                userRepo.getOrThrow(dto.getSecondUser()),
+                PageRequest.of(page, size));
     }
 
 }

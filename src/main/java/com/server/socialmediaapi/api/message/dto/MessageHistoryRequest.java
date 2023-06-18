@@ -5,13 +5,12 @@ import lombok.*;
 
 @Getter
 @Setter
-@ToString
 @AllArgsConstructor
 @NoArgsConstructor
 public class MessageHistoryRequest {
-    @Min(value = 0, message = "sender id cannot be less than 0")
+    @Min(value = 1, message = "sender id cannot be less than 0")
     private int firstUser;
 
-    @Min(value = 0, message = "consumer id cannot be less than 0")
+    @Min(value = 1, message = "consumer id cannot be less than 0")
     private int secondUser;
 }

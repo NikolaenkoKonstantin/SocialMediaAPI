@@ -53,24 +53,24 @@ public class FriendshipSuggestionService {
 
 
     private void deleteFriendshipSuggestion(int friendAccepting, int friendRequester) {
-        User userAccepting = userRepo.findById(friendAccepting).get();
-        User userRequester = userRepo.findById(friendRequester).get();
+        User userAccepting = userRepo.getOrThrow(friendAccepting);
+        User userRequester = userRepo.getOrThrow(friendRequester);
 
         friendshipSuggestionRepo.deleteBySenderAndConsumer(userRequester, userAccepting);
     }
 
 
     @Transactional
-    public void suggestFriendshipSuggestion(FriendshipSuggestionRequest dto){
+    public FriendshipSuggestion suggestFriendshipSuggestion(FriendshipSuggestionRequest dto){
         subscriptionService.subscribe(dto.getSender(), dto.getConsumer());
 
-        friendshipSuggestionRepo.save(createFriendshipSuggestion(dto));
+        return friendshipSuggestionRepo.save(createFriendshipSuggestion(dto));
     }
 
 
     private FriendshipSuggestion createFriendshipSuggestion(FriendshipSuggestionRequest dto) {
-        User sender = userRepo.findById(dto.getSender()).get();
-        User consumer = userRepo.findById(dto.getConsumer()).get();
+        User sender = userRepo.getOrThrow(dto.getSender());
+        User consumer = userRepo.getOrThrow(dto.getConsumer());
 
         return new FriendshipSuggestion(sender, consumer);
     }
