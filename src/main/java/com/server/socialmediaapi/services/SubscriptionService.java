@@ -7,6 +7,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Optional;
+
 @Service
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
@@ -16,8 +18,8 @@ public class SubscriptionService {
 
 
     @Transactional
-    public void subscribe(int subscriber, int publisher){
-        subscriptionRepo.save(createSubscription(subscriber, publisher));
+    public Subscription subscribe(int subscriber, int publisher){
+        return subscriptionRepo.save(createSubscription(subscriber, publisher));
     }
 
 
@@ -30,8 +32,8 @@ public class SubscriptionService {
 
 
     @Transactional
-    public void unsubscribe(int subscriber, int publisher){
-        subscriptionRepo.deleteBySubscriberAndPublisher(
+    public boolean unsubscribe(int subscriber, int publisher){
+        return subscriptionRepo.deleteBySubscriberAndPublisher(
                 userRepo.getOrThrow(subscriber),
                 userRepo.getOrThrow(publisher)
         );

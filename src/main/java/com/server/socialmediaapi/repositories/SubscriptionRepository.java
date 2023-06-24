@@ -12,5 +12,5 @@ public interface SubscriptionRepository extends JpaRepository<Subscription, Inte
      * @param subscriber - подписчик
      * @param publisher - публицист
      */
-    void deleteBySubscriberAndPublisher(User subscriber, User publisher);
+    boolean deleteBySubscriberAndPublisher(User subscriber, User publisher);
 }
