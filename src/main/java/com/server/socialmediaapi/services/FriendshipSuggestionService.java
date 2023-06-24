@@ -4,7 +4,9 @@ import com.server.socialmediaapi.api.friendshipSuggestion.dto.FriendshipSuggesti
 import com.server.socialmediaapi.api.friendshipSuggestion.dto.FriendshipSuggestionCancelRequest;
 import com.server.socialmediaapi.api.friendshipSuggestion.dto.FriendshipSuggestionRejectRequest;
 import com.server.socialmediaapi.api.friendshipSuggestion.dto.FriendshipSuggestionRequest;
+import com.server.socialmediaapi.models.Friendship;
 import com.server.socialmediaapi.models.FriendshipSuggestion;
+import com.server.socialmediaapi.models.Subscription;
 import com.server.socialmediaapi.models.User;
 import com.server.socialmediaapi.repositories.FriendshipSuggestionRepository;
 import com.server.socialmediaapi.repositories.UserRepository;
@@ -27,9 +29,9 @@ public class FriendshipSuggestionService {
         int friendRequester = dto.getFriendRequester();
         int friendReceiving = dto.getFriendReceiving();
 
-        subscriptionService.unsubscribe(friendRequester, friendReceiving);
-
-        deleteFriendshipSuggestion(friendReceiving, friendRequester);
+        if(subscriptionService.unsubscribe(friendRequester, friendReceiving)) {
+            deleteFriendshipSuggestion(friendReceiving, friendRequester);
+        }
     }
 
 
@@ -41,27 +43,46 @@ public class FriendshipSuggestionService {
 
     @Transactional
     public void acceptFriendshipSuggestion(FriendshipSuggestionAcceptRequest dto){
-        int friendAccepting = dto.getFriendAccepting();
-        int friendRequester = dto.getFriendRequester();
+        acceptFriendship(dto.getFriendAccepting(), dto.getFriendRequester());
+    }
 
-        subscriptionService.subscribe(friendAccepting, friendRequester);
 
-        friendshipService.acceptFriendship(friendAccepting, friendRequester);
+    private void acceptFriendship(int friendAccepting, int friendRequester){
+        subscribe(
+                friendAccepting,
+                friendRequester,
+                friendshipService.acceptFriendship(friendAccepting, friendRequester)
+        );
+    }
 
-        deleteFriendshipSuggestion(friendAccepting, friendRequester);
+
+    private void subscribe(int friendAccepting, int friendRequester, Friendship friendship){
+        if(friendship != null) {
+            deleteFriendshipSuggestion(
+                    friendAccepting,
+                    friendRequester,
+                    subscriptionService.subscribe(friendAccepting, friendRequester)
+            );
+        }
+    }
+
+
+    private void deleteFriendshipSuggestion(int friendAccepting, int friendRequester, Subscription subscription) {
+        if(subscription != null) {
+            deleteFriendshipSuggestion(friendAccepting, friendRequester);
+        }
     }
 
 
     private void deleteFriendshipSuggestion(int friendAccepting, int friendRequester) {
-        User userAccepting = userRepo.getOrThrow(friendAccepting);
-        User userRequester = userRepo.getOrThrow(friendRequester);
-
-        friendshipSuggestionRepo.deleteBySenderAndConsumer(userRequester, userAccepting);
+            friendshipSuggestionRepo.deleteBySenderAndConsumer(
+                    userRepo.getOrThrow(friendAccepting),
+                    userRepo.getOrThrow(friendRequester));
     }
 
 
     @Transactional
-    public FriendshipSuggestion suggestFriendshipSuggestion(FriendshipSuggestionRequest dto){
+    public FriendshipSuggestion SubscribeAndSuggestFriendshipSuggestion(FriendshipSuggestionRequest dto){
         subscriptionService.subscribe(dto.getSender(), dto.getConsumer());
 
         return friendshipSuggestionRepo.save(createFriendshipSuggestion(dto));
