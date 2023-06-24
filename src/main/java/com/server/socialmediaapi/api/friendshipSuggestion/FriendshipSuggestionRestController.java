@@ -34,7 +34,7 @@ public class FriendshipSuggestionRestController {
                                                         BindingResult bindingResult){
         hibernateValidator.validate(bindingResult);
 
-        return converter.convertToFriendshipSuggestionResponse(friendshipSuggestionService.suggestFriendshipSuggestion(dto));
+        return converter.convertToFriendshipSuggestionResponse(friendshipSuggestionService.SubscribeAndSuggestFriendshipSuggestion(dto));
     }
 
 

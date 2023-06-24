@@ -19,26 +19,32 @@ public class FriendshipService {
 
     @Transactional
     public void stopFriendship(FriendshipStopRequest dto){
-        int senderStopFriendship = dto.getSenderStopFriendship();
-        int recipientStopFriendship = dto.getRecipientStopFriendship();
-
-        subscriptionService.unsubscribe(senderStopFriendship, recipientStopFriendship);
-
-        deleteFriendship(senderStopFriendship, recipientStopFriendship);
+        deleteFriendship(dto.getSenderStopFriendship(), dto.getRecipientStopFriendship());
     }
 
 
     private void deleteFriendship(int senderStopFriendship, int recipientStopFriendship) {
-        friendshipRepo.delete(
-                userRepo.getOrThrow(senderStopFriendship),
-                userRepo.getOrThrow(recipientStopFriendship)
+        unsubscribe(
+                senderStopFriendship,
+                recipientStopFriendship,
+                friendshipRepo.delete(
+                        userRepo.getOrThrow(senderStopFriendship),
+                        userRepo.getOrThrow(recipientStopFriendship)
+                )
         );
     }
 
 
+    private void unsubscribe(int senderStopFriendship, int recipientStopFriendship, Boolean delete) {
+        if(delete){
+            subscriptionService.unsubscribe(senderStopFriendship, recipientStopFriendship);
+        }
+    }
+
+
     @Transactional
-    public void acceptFriendship(int first, int second){
-        friendshipRepo.save(createFriendship(first, second));
+    public Friendship acceptFriendship(int first, int second){
+        return friendshipRepo.save(createFriendship(first, second));
     }
 
 

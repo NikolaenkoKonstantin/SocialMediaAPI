@@ -19,5 +19,5 @@ public interface FriendshipRepository extends JpaRepository<Friendship, Integer>
     @Query("delete from Friendship f " +
             "where (f.firstFriend = :firstUser and f.secondFriend = :secondUser) " +
             "or (f.firstFriend = :secondUser and f.secondFriend = :firstUser)")
-    void delete(@Param("firstUser") User firstUser, @Param("secondUser") User secondUser);
+    Boolean delete(@Param("firstUser") User firstUser, @Param("secondUser") User secondUser);
 }
